@@ -288,6 +288,11 @@ export class ImageCompress {
 
         let compressedFile;
 
+        const size = ImageCompress.byteCount(myFile.image);
+        if (size <= maxSizeMb * 1024 * 1024) {
+            return myFile;
+        }
+
         for (let i = 0; i < MAX_TRIES; i++) {
             const previousSize = ImageCompress.byteCount(myFile.image);
             compressedFile = await ImageCompress.compress(myFile.image, myFile.orientation, render, 50, 100);
